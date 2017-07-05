@@ -13,5 +13,17 @@ export default ({ config, db }) => {
     );
   });
 
+  api.post('/', (req, res) => {
+    const url = req.body.url;
+
+    if (!url) {
+      throw new Error('Url not specified');
+    }
+
+    db.insert({url: url}).into('Photos').then(result => {
+      res.status(201).json(result);
+    });
+  });
+
   return api;
 }
