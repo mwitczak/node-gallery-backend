@@ -9,7 +9,6 @@ import api from './api';
 import config from './config.json';
 
 let app = express();
-app.server = http.createServer(app);
 
 // logger
 app.use(morgan('dev'));
@@ -31,10 +30,6 @@ initializeDb( db => {
 
 	// api router
 	app.use('/api', api({ config, db }));
-
-	app.server.listen(process.env.PORT || config.port, () => {
-		console.log(`Started on port ${app.server.address().port}`);
-	});
 });
 
 app.use((err, req, res, next) => {
