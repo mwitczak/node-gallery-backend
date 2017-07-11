@@ -4,22 +4,22 @@ export default ({ config, db }) => {
   let api = Router();
 
   api.get('/', (req, res) => {
-    db.select('*').from('Photos')
+    db.select('*').from('Galleries')
       .then(
         values => res.json(values)
       ).catch(
-        err => console.log(err)
+      err => console.log(err)
     );
   });
 
   api.post('/', (req, res) => {
-    const url = req.body.url;
+    const name = req.body.name;
 
-    if (!url) {
-      throw new Error('Url not specified');
+    if (!name) {
+      throw new Error('Name not specified');
     }
 
-    db.insert({url: url}).into('Photos').then(result => {
+    db.insert({name: name}).into('Galleries').then(result => {
       res.status(201).json(result);
     });
   });
@@ -27,7 +27,7 @@ export default ({ config, db }) => {
   api.delete('/:id', (req, res) => {
     const id = req.params.id;
 
-    db('photos').where('id', id).del().then(deleted => {
+    db('Galleries').where('id', id).del().then(deleted => {
       if (deleted > 0) {
         res.sendStatus(204);
       } else {
