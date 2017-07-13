@@ -24,6 +24,26 @@ export default ({ config, db }) => {
     });
   });
 
+  api.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedFields = req.body;
+
+    if (Object.keys(updatedFields).length === 0) {
+      throw new Error('Fields not specified');
+    }
+
+    db('Galleries').where('id', id).update(updatedFields).then(updated => {
+      if (updated > 0) {
+        res.sendStatus(204);
+      } else {
+        res.sendStatus(404);
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  });
+
   api.delete('/:id', (req, res) => {
     const id = req.params.id;
 
