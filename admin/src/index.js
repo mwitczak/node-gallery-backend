@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers/index';
 
+import 'semantic-ui-css/semantic.min.css';
+
 const rootEl = document.getElementById('root');
 
 /**

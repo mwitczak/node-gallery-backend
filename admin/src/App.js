@@ -1,23 +1,18 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import { connect } from 'react-redux'
 import { getListAction } from './actions/galleryActions'
+import GalleryTable from './components/galleryTable'
 
 class App extends Component {
   componentDidMount() {
     this.props.getListAction()
   }
 
-  renderGalleries() {
-    return this.props.galleries.map(gallery => (
-      <div>{gallery.name}</div>
-    ));
-  }
-
   render() {
     return (
       <div className="App">
-        {this.renderGalleries()}
+        <GalleryTable galleries={this.props.galleries} />
       </div>
     );
   }
