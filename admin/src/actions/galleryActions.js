@@ -20,3 +20,18 @@ export function getListAction() {
       })
   }
 }
+
+export function addAction(data) {
+  return function(dispatch) {
+    axios.post(`${API_URL}/galleries`, data)
+      .then(response => {
+        dispatch({
+          type: ACTION_TYPES.GALLERY_GETLIST,
+          payload: response.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+}

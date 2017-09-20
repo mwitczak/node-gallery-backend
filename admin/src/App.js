@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import { connect } from 'react-redux'
-import { getListAction } from './actions/galleryActions'
+import { addAction, getListAction } from './actions/galleryActions'
 import GalleryTable from './components/galleryTable'
 
 class App extends Component {
@@ -12,7 +12,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <GalleryTable galleries={this.props.galleries} />
+        <GalleryTable
+          addGallery={this.props.addAction}
+          galleries={this.props.galleries} />
       </div>
     );
   }
@@ -24,4 +26,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getListAction })(App);
+export default connect(mapStateToProps, {
+  getListAction,
+  addAction
+})(App);
